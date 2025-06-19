@@ -21,66 +21,87 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.savedstate.SavedStateRegistryController
+import androidx.compose.ui.unit.dp
 import org.utl.ejemplo2composeridgs901.ui.theme.Ejemplo2ComposerIDGS901Theme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.*
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val navController = rememberNavController()
-            navHost(navController= navController, startDestination = "inicio"){
-                composable("inicio"){PantallaInicio(navController)}
-                composable("detalle/{nombre}"){backStackEntry ->
-                    val nombre = backStackEntry.arguments?.getString("nombre")?:"invitado"
-                    PnatallaDetalle(navController, nombre)
-                }
-            }
+            SumaDosNumeros()
+            //val navController = rememberNavController()
+            //NavHost(navController = navController, startDestination = "inicio") {
+                //composable("inicio") { PantallaInicio(navController) }
+                //composable("detalle/{nombre}") { backStackEntry ->
+                   // val nombre = backStackEntry.arguments?.getString("nombre") ?: "invitado"
+                    //PantallaDetalle(navController, nombre)
+              //  }
+           // }
         }
+    }
 }
-
+/*
 @Composable
-fun pantallaInicip(navController: NavHostController){
+fun PantallaInicio(navController: NavHostController) {
     var nombre by remember { mutableStateOf("") }
 
-    Column (
+    Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Text("pantalla de inicio")
+    ) {
+        Text("Pantalla de inicio")
         Spacer(modifier = Modifier.height(16.dp))
 
         TextField(
             value = nombre,
-            onValueChange = {nombre = it},
-            label = { Text("ingrese su nombre") },
-            modifier = Modifier.fillMaxHeight()
+            onValueChange = { nombre = it },
+            label = { Text("Ingrese su nombre") },
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
         )
 
         Spacer(Modifier.height(16.dp))
         Button(onClick = {
-            val nombre = nombre.ifBlank{"cardiel"}
-            navController.navigate("detalle/$nombre")
-        }){
-            Text("ir a detalle con nombre")
+            val nombreFinal = nombre.ifBlank { "Cardiel" }
+            navController.navigate("detalle/$nombreFinal")
+        }) {
+            Text("Ir a detalle con nombre")
         }
     }
-
 }
-    @Composable
-    fun PantallaDetalle(navController: NavHostController){
-        ){
-            value
+
+@Composable
+fun PantallaDetalle(navController: NavHostController, nombre: String) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Hola $nombre")
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            navController.navigate("inicio")
+        }) {
+            Text("Volver a Inicio")
         }
     }
-
+}
+*/
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Ejemplo2ComposerIDGS901Theme {
-        Greeting("Android")
+        Text("Preview funcionando")
     }
 }
+
+

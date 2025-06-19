@@ -12,41 +12,46 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.runtime.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.Composable
 
 @Composable
-fun SumaDosNumeros{
+fun SumaDosNumeros() {
     var num1 by remember { mutableStateOf("") }
     var num2 by remember { mutableStateOf("") }
     var resultado by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp),
-        verticalArrangement = Arrangement.SpacedBy(12.dp),
-
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         TextField(
             value = num1,
-            onValueChange = {num1 = it},
-            label = { Text("numero 1") },
+            onValueChange = { num1 = it },
+            label = { Text("Número 1") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         TextField(
             value = num2,
-            onValueChange = {num2 = it},
-            label = { Text("numero 2") },
+            onValueChange = { num2 = it },
+            label = { Text("Número 2") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Button(onClick =  {
+        Button(onClick = {
             val n1 = num1.toIntOrNull()
             val n2 = num2.toIntOrNull()
-            resultado = if (n1 != null && n2 != null){
-                "resultado: ${n1 + n2}"
-            }else{
-                "ingrese numeros validos"
+            resultado = if (n1 != null && n2 != null) {
+                "Resultado: ${n1 + n2}"
+            } else {
+                "Ingrese números válidos"
             }
-        }){
-            Text("sumar")
+        }) {
+            Text("Sumar")
         }
+
+        Text(resultado)
     }
 }
