@@ -15,12 +15,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
+import androidx.compose.material3.RadioButton
+import androidx.compose.foundation.layout.Row
 
 @Composable
 fun SumaDosNumeros() {
     var num1 by remember { mutableStateOf("") }
     var num2 by remember { mutableStateOf("") }
     var resultado by remember { mutableStateOf("") }
+    var operacion by remember { mutableStateOf("Suma") }
+
+    val operaciones = listOf("Suma", "Resta", "Multiplicación", "División")
 
     Column(
         modifier = Modifier
@@ -40,16 +45,33 @@ fun SumaDosNumeros() {
             label = { Text("Número 2") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
+
+        operaciones.forEach { op ->
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                RadioButton(
+                    selected = operacion == op,
+                    onClick = { operacion = op }
+                )
+                Text(op)
+            }
+        }
+
         Button(onClick = {
-            val n1 = num1.toIntOrNull()
-            val n2 = num2.toIntOrNull()
+            val n1 = num1.toDoubleOrNull()
+            val n2 = num2.toDoubleOrNull()
             resultado = if (n1 != null && n2 != null) {
-                "Resultado: ${n1 + n2}"
+                when (operacion) {
+                    "Suma" -> "Resultado: ${n1 + n2}"
+                    "Resta" -> "Resultado: ${n1 - n2}"
+                    "Multiplicación" -> "Resultado: ${n1 * n2}"
+                    "División" -> if (n2 != 0.0) "Resultado: ${n1 / n2}" else "División por cero"
+                    else -> "Operación no válida"
+                }
             } else {
                 "Ingrese números válidos"
             }
         }) {
-            Text("Sumar")
+            Text("Calcular")
         }
 
         Text(resultado)

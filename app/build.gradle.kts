@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "org.utl.ejemplo2composeridgs901"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "org.utl.ejemplo2composeridgs901"
@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.navigation:navigation-compose:2.7.7")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

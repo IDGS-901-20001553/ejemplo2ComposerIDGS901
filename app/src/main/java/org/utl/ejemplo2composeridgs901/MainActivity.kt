@@ -96,12 +96,5 @@ fun PantallaDetalle(navController: NavHostController, nombre: String) {
 }
 */
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Ejemplo2ComposerIDGS901Theme {
-        Text("Preview funcionando")
-    }
-}
 
 
